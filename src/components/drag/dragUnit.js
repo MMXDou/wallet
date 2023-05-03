@@ -35,7 +35,7 @@ class DragUnit extends DragBasic {
             if (this.moveDistance.x > 113 && this.dragUnit.nextSibling != GetElements.getAddUnit()) {
                 // this.dragUnit.nextSibling.insertAdjacentElement('afterend', this.dragUnit)
                 this.moveTarget.parentNode.insertBefore(this.moveTarget.nextSibling, this.moveTarget)
-                this.startPosition.x = this.startPosition.x = event.clientX
+                this.startPosition.x = event.clientX
 
             }
             this.dragUnit.style.transform = `translate(${this.moveDistance.x}px, ${this.moveDistance.y}px)`
