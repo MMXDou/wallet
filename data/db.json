@@ -1,0 +1,24 @@
+{
+    "units": [
+        {
+            "currency": "BTC",
+            "num": "69",
+            "symbol": "%"
+        },
+        {
+            "currency": "LTC",
+            "num": "82",
+            "symbol": "%"
+        },
+        {
+            "currency": "XRP",
+            "num": "99",
+            "symbol": "%"
+        },
+        {
+            "currency": "BLT",
+            "num": "66",
+            "symbol": "%"
+        }
+    ]
+}
