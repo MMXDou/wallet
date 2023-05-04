@@ -7,7 +7,7 @@ export class DragBasic {
         // this.run()
     }
 
-    init() {
+    init = () => {
         console.log('super init');
         this.isMouseDownOnDragElement = false
 
@@ -24,15 +24,15 @@ export class DragBasic {
         this.mouseMove()
     }
 
-    mouseDown() {
+    mouseDown = () => {
         this.dragElement.addEventListener('mousedown', this._mouseDownOnDragElement.bind(this))
     }
 
-    mouseMove() {
+    mouseMove = () => {
         document.body.addEventListener('mousemove', this._mouseMoveToDrag.bind(this))
     }
 
-    mouseUp() {
+    mouseUp = () => {
         document.body.addEventListener('mouseup', this._mouseUpFromDragElement.bind(this))
     }
 
@@ -45,7 +45,7 @@ export class DragBasic {
     }
 
     _mouseMoveToDrag(event) {
-        console.log('super move');
+        // console.log('super move');
         if (this.isMouseDownOnDragElement) {
             this.moveDistance.x = event.clientX - this.startPosition.x + this.alreadyMovedDistance.x
             this.moveDistance.y = event.clientY - this.startPosition.y + this.alreadyMovedDistance.y
