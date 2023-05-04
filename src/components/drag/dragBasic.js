@@ -43,6 +43,7 @@ export class DragBasic {
     }
 
     _mouseMoveToDrag(event) {
+        console.log('enter');
         if (this.isMouseDownOnDragElement) {
             this.moveDistance.x = event.clientX - this.startPosition.x + this.alreadyMovedDistance.x
             this.moveDistance.y = event.clientY - this.startPosition.y + this.alreadyMovedDistance.y
