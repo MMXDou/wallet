@@ -9,9 +9,9 @@ class DragUnit extends DragBasic {
 
         this.dragUnit = dragUnit
         this.zIndex = this.dragUnit.style.zIndex
-        // this.transition = this.dragUnit.style.transition
-        // this.currentIndex = -1
-        // this.originalIndex = -1
+        this.transition = this.dragUnit.style.transition
+        console.log(this.dragUnit);
+        console.log('this.transition ', this.dragUnit.style.transition);
         this.run()
 
     }
@@ -26,8 +26,8 @@ class DragUnit extends DragBasic {
         this.countPassedNode = 0
         this.moveDistance = { x: 0, y: 0 }
         this.ifChangedPosition = false
-        // this.dragUnit.style.transition = 'none'
-
+        this.dragUnit.style.transition = 'none'
+        console.log('his.transition', this.transition);
         console.log('currentIndex:', this.currentIndex);
         console.log('originalIndex:', this.originalIndex);
         console.log('passed node', this.countPassedNode);
@@ -35,6 +35,8 @@ class DragUnit extends DragBasic {
         console.log(' event.clientX:', event.clientX);
         console.log('this.moveDistance.x:', this.moveDistance.x);
         console.log('this.isMouseDownOnDragElement:', this.isMouseDownOnDragElement);
+        console.log('this.transition:', this.dragUnit.style.transition);
+        console.log('dragunit transition:', this.dragUnit.nextSibling.style.transition);
     }
 
     _mouseMoveToDrag = (event) => {
@@ -62,7 +64,7 @@ class DragUnit extends DragBasic {
             this.moveDistanceFromLastNode = this.moveDistance.x - this.countPassedNode * 114
             console.log(`${this.moveDistanceFromLastNode} = ${this.moveDistance.x} - ${this.countPassedNode * 114}`);
             if (this.moveDistance.x < 0) {
-                if (this.moveDistanceFromLastNode < -114 && this.currentIndex > 0) {
+                if (this.moveDistanceFromLastNode < -114 && this.currentIndex > 0 && this.countPassedNode <= 0) {
                     this.currentIndex--
                     this.dragUnit.parentNode.children[this.currentIndex].style.transform = `translateX(114px)`
                     this.countPassedNode--
@@ -71,8 +73,9 @@ class DragUnit extends DragBasic {
                     console.log('passed node', this.countPassedNode);
                 }
                 if (this.moveDistanceFromLastNode > 114 && this.currentIndex < this.originalIndex) {
+
+                    this.dragUnit.parentNode.children[this.currentIndex].style.transform = `translateX(0px)`
                     this.currentIndex++
-                    this.dragUnit.parentNode.children[this.currentIndex - 1].style.transform = `translateX(0px)`
                     this.countPassedNode++
 
                     console.log('index:', this.currentIndex);
@@ -81,12 +84,13 @@ class DragUnit extends DragBasic {
             }
             if (this.moveDistance.x > 0 && this.countPassedNode < 0) {
                 console.log('enter');
+
+                this.dragUnit.parentNode.children[this.currentIndex].style.transform = `translateX(0px)`
                 this.currentIndex++
-                this.dragUnit.parentNode.children[this.currentIndex - 1].style.transform = `translateX(0px)`
                 this.countPassedNode++
             }
             if (this.moveDistance.x > 0) {
-                if (this.moveDistanceFromLastNode > 114 && this.currentIndex < GetElements.getUnitsExceptAddUnit().length - 1) {
+                if (this.moveDistanceFromLastNode > 114 && this.currentIndex < GetElements.getUnitsExceptAddUnit().length - 1 && this.countPassedNode >= 0) {
                     this.currentIndex++
                     this.dragUnit.parentNode.children[this.currentIndex].style.transform = `translateX(-114px)`
 
@@ -120,6 +124,7 @@ class DragUnit extends DragBasic {
 
     _mouseUpFromDragElement = (event) => {
         this.isMouseDownOnDragElement = false
+        this.dragUnit.style.transition = this.transition
         // if (this.isMouseDownOnDragElement) {
         console.log('up new');
         // console.log(event.currentTarget);
@@ -144,12 +149,12 @@ class DragUnit extends DragBasic {
                 this.ifChangedPosition = true
             }
         }
-
+        this.dragUnit.style.transition = this.transition
         this.dragUnit.style.transform = `translate(0px, 0px)`
         this.dragUnit.style.zIndex = this.zIndex
         // }
 
-        // this.dragUnit.style.transition = this.transition
+
 
     }
 }
