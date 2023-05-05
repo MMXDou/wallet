@@ -124,7 +124,6 @@ class DragUnit extends DragBasic {
 
     _mouseUpFromDragElement = (event) => {
         this.isMouseDownOnDragElement = false
-        this.dragUnit.style.transition = this.transition
         // if (this.isMouseDownOnDragElement) {
         console.log('up new');
         // console.log(event.currentTarget);
@@ -138,7 +137,9 @@ class DragUnit extends DragBasic {
                 console.log('left:', this.dragUnit.parentNode.children[this.currentIndex]);
                 console.log('this unit:', this.dragUnit);
                 this.dragUnit.parentNode.insertBefore(this.dragUnit, this.dragUnit.parentNode.children[this.currentIndex])
-                this.ifChangedPosition = true
+                this.dragUnit.style.transform = `translate(${this.moveDistanceFromLastNode}px, ${this.moveDistance.y}px)`
+                console.log(`this.moveDistanceFromLastNode: ${this.moveDistanceFromLastNode}, this.moveDistance.y: ${this.moveDistance.y}`);
+                // this.ifChangedPosition = true
             }
             if (this.currentIndex > this.originalIndex) {
                 console.log('this.currentIndex:', this.currentIndex);
@@ -146,11 +147,20 @@ class DragUnit extends DragBasic {
                 console.log('right:', this.dragUnit.parentNode.children[this.currentIndex + 1]);
                 console.log('this unit:', this.dragUnit);
                 this.dragUnit.parentNode.insertBefore(this.dragUnit, this.dragUnit.parentNode.children[this.currentIndex + 1])
-                this.ifChangedPosition = true
+                this.dragUnit.style.transform = `translate(${this.moveDistanceFromLastNode}px, ${this.moveDistance.y}px)`
+                console.log(`this.moveDistanceFromLastNode: ${this.moveDistanceFromLastNode}, this.moveDistance.y: ${this.moveDistance.y}`);
+                // this.ifChangedPosition = true
             }
         }
+        this.ifChangedPosition = true
+        // this.dragUnit.style.transform = `translate(${this.moveDistanceFromLastNode}px, ${this.moveDistance.y}px)`
+
+
         this.dragUnit.style.transition = this.transition
-        this.dragUnit.style.transform = `translate(0px, 0px)`
+        setTimeout(() => {
+            this.dragUnit.style.transform = `translate(0px, 0px)`
+        }, 10)
+        // this.dragUnit.style.transform = `translate(0px, 0px)`
         this.dragUnit.style.zIndex = this.zIndex
         // }
 
